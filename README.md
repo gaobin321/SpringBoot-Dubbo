@@ -19,3 +19,6 @@ https://github.com/gaobin321/SpringBoot-Dubbo-Web.git
 -----
 
 后期会将框架结构制作成Maven archetype，方便快速自动生成新的迭代项目代码
+
+expression-analyzer 使用文档
+http://www.docin.com/p-1382090644.html
