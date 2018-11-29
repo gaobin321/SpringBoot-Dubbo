@@ -13,7 +13,7 @@ arris-dubbo-web WEB 服务聚合层，服务消费者，对外提供HTTP接口
 
 arris-dubbo-web 与 arris-dubbo-rpc 两个单独打包部署，不同的Jar包。
 arris-dubbo-web module功能同 wenba-arris-dubbo-web 项目
-https://gitlab-wenba.xueba100.com:2443/wenba-java/wenba-arris-dubbo-web.git
+https://github.com/gaobin321/SpringBoot-Dubbo-Web.git
 
 使用方式
 -----
