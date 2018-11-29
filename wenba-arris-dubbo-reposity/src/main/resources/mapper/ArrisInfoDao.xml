@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wenba.reposity.arris.ArrisInfoDao">
+
+  <resultMap id="BaseResultMap" type="com.wenba.common.domain.ArrisInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="arris_vers" jdbcType="VARCHAR" property="arrisVers" />
+    <result column="arris_name" jdbcType="VARCHAR" property="arrisName" />
+    <result column="arris_detail" jdbcType="VARCHAR" property="arrisDetail" />
+    <result column="arris_desc" jdbcType="VARCHAR" property="arrisDesc" />
+    <result column="arris_is_curr_v" jdbcType="TINYINT" property="arrisIsCurrV" />
+    <result column="create_id" jdbcType="INTEGER" property="createId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_id" jdbcType="INTEGER" property="updateId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="ext" jdbcType="VARCHAR" property="ext" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, arris_vers, arris_name, arris_detail, arris_desc, arris_is_curr_v, create_id, 
+    DATE_FORMAT(create_time,"%Y-%m-%d") create_time, update_id, DATE_FORMAT(update_time,"%Y-%m-%d") update_time
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from arris_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from arris_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.wenba.common.domain.ArrisInfo">
+    insert into arris_info (id, arris_vers, arris_name, 
+      arris_detail, arris_desc, arris_is_curr_v, 
+      create_id, create_time, update_id, 
+      update_time, ext)
+    values (#{id,jdbcType=INTEGER}, #{arrisVers,jdbcType=VARCHAR}, #{arrisName,jdbcType=VARCHAR}, 
+      #{arrisDetail,jdbcType=VARCHAR}, #{arrisDesc,jdbcType=VARCHAR}, #{arrisIsCurrV,jdbcType=TINYINT}, 
+      #{createId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{ext,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.wenba.common.domain.ArrisInfo">
+    insert into arris_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="arrisVers != null">
+        arris_vers,
+      </if>
+      <if test="arrisName != null">
+        arris_name,
+      </if>
+      <if test="arrisDetail != null">
+        arris_detail,
+      </if>
+      <if test="arrisDesc != null">
+        arris_desc,
+      </if>
+      <if test="arrisIsCurrV != null">
+        arris_is_curr_v,
+      </if>
+      <if test="createId != null">
+        create_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateId != null">
+        update_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="ext != null">
+        ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="arrisVers != null">
+        #{arrisVers,jdbcType=VARCHAR},
+      </if>
+      <if test="arrisName != null">
+        #{arrisName,jdbcType=VARCHAR},
+      </if>
+      <if test="arrisDetail != null">
+        #{arrisDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="arrisDesc != null">
+        #{arrisDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="arrisIsCurrV != null">
+        #{arrisIsCurrV,jdbcType=TINYINT},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null">
+        #{updateId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext != null">
+        #{ext,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.wenba.common.domain.ArrisInfo">
+    update arris_info
+    <set>
+      <if test="arrisVers != null">
+        arris_vers = #{arrisVers,jdbcType=VARCHAR},
+      </if>
+      <if test="arrisName != null">
+        arris_name = #{arrisName,jdbcType=VARCHAR},
+      </if>
+      <if test="arrisDetail != null">
+        arris_detail = #{arrisDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="arrisDesc != null">
+        arris_desc = #{arrisDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="arrisIsCurrV != null">
+        arris_is_curr_v = #{arrisIsCurrV,jdbcType=TINYINT},
+      </if>
+      <if test="createId != null">
+        create_id = #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null">
+        update_id = #{updateId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext != null">
+        ext = #{ext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.wenba.common.domain.ArrisInfo">
+    update arris_info
+    set arris_vers = #{arrisVers,jdbcType=VARCHAR},
+      arris_name = #{arrisName,jdbcType=VARCHAR},
+      arris_detail = #{arrisDetail,jdbcType=VARCHAR},
+      arris_desc = #{arrisDesc,jdbcType=VARCHAR},
+      arris_is_curr_v = #{arrisIsCurrV,jdbcType=TINYINT},
+      create_id = #{createId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_id = #{updateId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      ext = #{ext,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+
+
+  <!-- 获取表达式列表总记录数量 -->
+  <select id="selArrisInfoListNum" parameterType="com.wenba.common.domain.ArrisInfo" resultType="int">
+    select
+    count(id) as total
+    from arris_info
+    <where>
+      <if test="id != null and id != ''">
+        and id = #{id}
+      </if>
+      <if test = "arrisVers != null and arrisVers != ''">
+        and arris_vers = #{arrisVers}
+      </if>
+      <if test = "arrisName != null and arrisName != ''">
+        and arris_name = #{arrisName}
+      </if>
+
+      <if test = "create_start != null and create_start != ''">
+        <if test = "create_end != null and create_end != ''">
+          and create_time BETWEEN #{create_start} AND #{create_end}
+        </if>
+        <if test = "create_end == null or create_end == ''">
+          and create_time &gt; #{create_start}
+        </if>
+      </if>
+
+      <if test = "create_end != null and create_end != ''">
+        <if test = "create_start == null or create_start == ''">
+          AND create_time &lt; #{create_end}
+        </if>
+      </if>
+    </where>
+
+  </select>
+
+
+  <!-- 查询表达式列表 -->
+  <select id="selArrisInfoList" parameterType="com.wenba.common.domain.ArrisInfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from arris_info
+    <where>
+      <if test="id != null and id != ''">
+        and id = #{id}
+      </if>
+      <if test = "arrisVers != null and arrisVers != ''">
+        and arris_vers = #{arrisVers}
+      </if>
+      <if test = "arrisName != null and arrisName != ''">
+        and arris_name = #{arrisName}
+      </if>
+
+      <if test = "create_start != null and create_start != ''">
+        <if test = "create_end != null and create_end != ''">
+          and create_time BETWEEN #{create_start} AND #{create_end}
+        </if>
+        <if test="create_end == null or create_end == ''">
+          and create_time &gt; #{create_start}
+        </if>
+      </if>
+
+      <if test="create_end != null and create_end != ''">
+        <if test="create_start == null or create_start == ''">
+          AND create_time &lt; #{create_end}
+        </if>
+      </if>
+    </where>
+      limit #{pageNum},#{pageSize}
+  </select>
+
+
+  <!-- 查询表达式列表 -->
+  <select id="checkArrisVN" parameterType="com.wenba.common.domain.ArrisInfo" resultType="int">
+    select count(1) as count
+      from arris_info
+    where
+          arris_vers = #{arrisVers}
+      and arris_name = #{arrisName}
+  </select>
+
+
+  <!-- 新增表达式 -->
+  <insert id="insArrisInfoList" parameterType="com.wenba.common.domain.ArrisInfo">
+    insert into arris_info
+    (arris_vers, arris_name,
+    arris_detail, arris_desc, arris_is_curr_v,
+    create_id, ext)
+    values
+      (#{arrisVers,jdbcType=VARCHAR}, #{arrisName,jdbcType=VARCHAR},
+      #{arrisDetail,jdbcType=VARCHAR}, #{arrisDesc,jdbcType=VARCHAR}, #{arrisIsCurrV,jdbcType=TINYINT},
+      #{createId,jdbcType=INTEGER}, #{ext,jdbcType=VARCHAR})
+  </insert>
+
+
+  <!-- 更新表达式 -->
+  <update id="updArrisInfoList" parameterType="com.wenba.common.domain.ArrisInfo" >
+    update arris_info
+    <set>
+      update_time = now(),
+      <if test="arrisVers != null and arrisVers != ''">
+        arris_vers = #{arrisVers},
+      </if>
+      <if test="arrisName != null and arrisName != ''">
+        arris_name = #{arrisName},
+      </if>
+      <if test="arrisDetail != null and arrisDetail != ''">
+        arris_detail = #{arrisDetail},
+      </if>
+      <if test="arrisDesc != null and arrisDesc != ''">
+        arris_desc = #{arrisDesc},
+      </if>
+      <if test="arrisIsCurrV != null and arrisIsCurrV != ''">
+        arris_is_curr_v = #{arrisIsCurrV},
+      </if>
+      <if test="createId != null and createId != ''">
+        create_id = #{createId},
+      </if>
+      <if test="createTime != null and createTime != ''">
+        create_time = #{createTime},
+      </if>
+      <if test="updateId != null and updateId != ''">
+        update_id = #{updateId},
+      </if>
+      <if test="ext != null and ext != ''">
+        ext = #{ext},
+      </if>
+    </set>
+    <where>
+      id = #{id}
+    </where>
+  </update>
+
+
+  <!-- 删除表达式 -->
+  <delete id="delArrisInfoList" parameterType="com.wenba.common.domain.ArrisInfo" >
+    delete
+    from arris_info
+    <where>
+      <if test="id != null and id != ''">
+        and id = #{id}
+      </if>
+      <if test = "arrisVers != null and arrisVers != ''">
+        and arris_vers = #{arrisVers}
+      </if>
+      <if test = "arrisName != null and arrisName != ''">
+        and arris_name = #{arrisName}
+      </if>
+    </where>
+  </delete>
+
+</mapper>
