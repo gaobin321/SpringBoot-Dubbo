@@ -1,43 +1,38 @@
 package com.wenba.common.domain;
 
-
 import com.alibaba.fastjson.annotation.JSONField;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
- * arris_info
- * @author
+ * arris_expr
+ * @author 
  */
-public class ArrisInfo implements Serializable {
+public class ArrisExpr implements Serializable {
+
 
     private static final long serialVersionUID = 1L;
-
     /**
      * 自增ID
      */
     private Integer id;
 
     /**
-     * 表达式名称
+     * 表达式id
      */
-    private String arrisName;
+    private Integer infoId;
 
     /**
-     * 当前发布版本
+     * 表达式详情
      */
-    private Integer arrisVers;
+    private String arrisDetail;
 
     /**
-     * 表达式描述
+     * 表达式详情版本
      */
-    private String arrisDesc;
-
-    /**
-     * 表达式版本状态(是否启用): 1 是 0 否'
-     */
-    private Byte arrisState;
+    private Integer exprVers;
 
     /**
      * 创建人
@@ -47,7 +42,6 @@ public class ArrisInfo implements Serializable {
     /**
      * 创建时间
      */
-
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @JSONField(format="yyyy-MM-dd")
     private String createTime;
@@ -87,36 +81,28 @@ public class ArrisInfo implements Serializable {
         this.id = id;
     }
 
-    public String getArrisName() {
-        return arrisName;
+    public Integer getInfoId() {
+        return infoId;
     }
 
-    public void setArrisName(String arrisName) {
-        this.arrisName = arrisName;
+    public void setInfoId(Integer infoId) {
+        this.infoId = infoId;
     }
 
-    public Integer getArrisVers() {
-        return arrisVers;
+    public String getArrisDetail() {
+        return arrisDetail;
     }
 
-    public void setArrisVers(Integer arrisVers) {
-        this.arrisVers = arrisVers;
+    public void setArrisDetail(String arrisDetail) {
+        this.arrisDetail = arrisDetail;
     }
 
-    public String getArrisDesc() {
-        return arrisDesc;
+    public Integer getExprVers() {
+        return exprVers;
     }
 
-    public void setArrisDesc(String arrisDesc) {
-        this.arrisDesc = arrisDesc;
-    }
-
-    public Byte getArrisState() {
-        return arrisState;
-    }
-
-    public void setArrisState(Byte arrisState) {
-        this.arrisState = arrisState;
+    public void setExprVers(Integer exprVers) {
+        this.exprVers = exprVers;
     }
 
     public Integer getCreateId() {
@@ -194,12 +180,11 @@ public class ArrisInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "ArrisInfo{" +
+        return "ArrisExpr{" +
                 "id=" + id +
-                ", arrisName='" + arrisName + '\'' +
-                ", arrisVers=" + arrisVers +
-                ", arrisDesc='" + arrisDesc + '\'' +
-                ", arrisState=" + arrisState +
+                ", infoId=" + infoId +
+                ", arrisDetail='" + arrisDetail + '\'' +
+                ", exprVers=" + exprVers +
                 ", createId=" + createId +
                 ", createTime='" + createTime + '\'' +
                 ", updateId=" + updateId +

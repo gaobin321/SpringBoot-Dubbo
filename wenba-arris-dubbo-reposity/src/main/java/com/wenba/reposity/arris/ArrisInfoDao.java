@@ -1,6 +1,7 @@
 package com.wenba.reposity.arris;
 
 import com.wenba.common.domain.ArrisInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public interface ArrisInfoDao {
     //查询表达式列表
     List<ArrisInfo> selArrisInfoList(ArrisInfo ai);
 
-    //查询表达式列表
+    //检验表达式版本和表达式名称
     int checkArrisVN(ArrisInfo ai);
 
     //新增表达式
@@ -39,4 +40,10 @@ public interface ArrisInfoDao {
 
     //删除表达式
     int delArrisInfoList(ArrisInfo ai);
+
+    //检验表达式是否存在
+    int checkArrisID(@Param("id") int id);
+
+    //校验表达式是否改变
+    int checkArrisDet(@Param("id") Integer id, @Param("arrisDetail") String arrisDetail);
 }

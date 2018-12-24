@@ -1,16 +1,14 @@
 package com.wenba.rpc.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.wenba.api.ArrisServiceFacade;
-import com.wenba.common.annotation.Master;
+import com.wenba.api.ArrisInfoServiceFacade;
 import com.wenba.common.domain.ArrisInfo;
-import com.wenba.common.domain.User;
-import com.wenba.common.vo.UserVo;
-import com.wenba.service.arris.ArrisService;
+import com.wenba.common.utils.base.DataResult;
+import com.wenba.service.arris.ArrisInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service(
         application = "${dubbo.application.id}",
@@ -19,10 +17,10 @@ import java.util.List;
         group = "${dubbo.provider.group}"
 )
 
-public class ArrisServiceProvider implements ArrisServiceFacade {
+public class ArrisInfoServiceProvider implements ArrisInfoServiceFacade {
 
     @Autowired
-    ArrisService arrisService;
+    ArrisInfoService arrisService;
 
 
     //获取表达式列表总记录数量
@@ -61,9 +59,9 @@ public class ArrisServiceProvider implements ArrisServiceFacade {
         return arrisService.delArrisInfoList(ai);
     }
 
-    //调用表达式
+    //检验表达式是否存在
     @Override
-    public int transArrisInfoList(ArrisInfo ai) {
-        return 0;
+    public int checkArrisID(int id) {
+        return arrisService.checkArrisID(id);
     }
 }

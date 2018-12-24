@@ -2,6 +2,8 @@ package com.wenba.common.base;
 
 import lombok.*;
 
+import java.io.Serializable;
+
 /**
  * @ Author
  * @ Date       ：Created in 5:43 PM 2018/10/24
@@ -15,7 +17,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BaseResult {
+public class BaseResult implements Serializable {
     Integer code;
     String msg;
 }

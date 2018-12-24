@@ -242,11 +242,25 @@ public class LexicalAnalyzer {
 							.value(ch).buildConst();
 			break;
 		case STRING_END:
-			String str = curWordText.substring(1, curWordText.length()-1);
+			/*String str = curWordText.substring(1, curWordText.length()-1);
 			str = ExpressionUtil.transformEscapesInString(str);
 			curToken = TokenBuilder.getBuilder().line(curLine).column(wordStartColumn)
-							.text(curWordText).dataType(DataType.STRING)
-							.value(str).buildConst();
+					.text(curWordText).dataType(DataType.STRING)
+					.value(str).buildConst();*/
+			/**
+			 *	GB
+			 */
+			String str = curWordText.substring(1, curWordText.length()-1);
+			if(str.startsWith("#")) {
+				curToken = TokenBuilder.getBuilder().line(curLine).column(wordStartColumn)
+						.text(curWordText).buildVariable();
+			}else{
+				str = ExpressionUtil.transformEscapesInString(str);
+				curToken = TokenBuilder.getBuilder().line(curLine).column(wordStartColumn)
+						.text(curWordText).dataType(DataType.STRING)
+						.value(str).buildConst();
+			}
+
 			break;
 		}
 		return curToken;

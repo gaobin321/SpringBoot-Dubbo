@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.wenba.reposity.arris.ArrisInfoDao">
 
   <resultMap id="BaseResultMap" type="com.wenba.common.domain.ArrisInfo">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="arris_vers" jdbcType="VARCHAR" property="arrisVers" />
     <result column="arris_name" jdbcType="VARCHAR" property="arrisName" />
-    <result column="arris_detail" jdbcType="VARCHAR" property="arrisDetail" />
+    <result column="arris_vers" jdbcType="INTEGER" property="arrisVers" />
     <result column="arris_desc" jdbcType="VARCHAR" property="arrisDesc" />
-    <result column="arris_is_curr_v" jdbcType="TINYINT" property="arrisIsCurrV" />
+    <result column="arris_state" jdbcType="TINYINT" property="arrisState" />
     <result column="create_id" jdbcType="INTEGER" property="createId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_id" jdbcType="INTEGER" property="updateId" />
@@ -17,8 +17,8 @@
   </resultMap>
 
   <sql id="Base_Column_List">
-    id, arris_vers, arris_name, arris_detail, arris_desc, arris_is_curr_v, create_id, 
-    DATE_FORMAT(create_time,"%Y-%m-%d") create_time, update_id, DATE_FORMAT(update_time,"%Y-%m-%d") update_time
+    id, arris_name, arris_vers, arris_desc, arris_state, create_id, DATE_FORMAT(create_time,"%Y-%m-%d") create_time, update_id,
+    DATE_FORMAT(update_time,"%Y-%m-%d") update_time, ext
   </sql>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -34,14 +34,14 @@
   </delete>
 
   <insert id="insert" parameterType="com.wenba.common.domain.ArrisInfo">
-    insert into arris_info (id, arris_vers, arris_name, 
-      arris_detail, arris_desc, arris_is_curr_v, 
-      create_id, create_time, update_id, 
-      update_time, ext)
-    values (#{id,jdbcType=INTEGER}, #{arrisVers,jdbcType=VARCHAR}, #{arrisName,jdbcType=VARCHAR}, 
-      #{arrisDetail,jdbcType=VARCHAR}, #{arrisDesc,jdbcType=VARCHAR}, #{arrisIsCurrV,jdbcType=TINYINT}, 
-      #{createId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=INTEGER}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{ext,jdbcType=VARCHAR})
+    insert into arris_info (id, arris_name, arris_vers, 
+      arris_desc, arris_state, create_id, 
+      create_time, update_id, update_time, 
+      ext)
+    values (#{id,jdbcType=INTEGER}, #{arrisName,jdbcType=VARCHAR}, #{arrisVers,jdbcType=INTEGER}, 
+      #{arrisDesc,jdbcType=VARCHAR}, #{arrisState,jdbcType=TINYINT}, #{createId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{ext,jdbcType=VARCHAR})
   </insert>
 
   <insert id="insertSelective" parameterType="com.wenba.common.domain.ArrisInfo">
@@ -50,20 +50,17 @@
       <if test="id != null">
         id,
       </if>
-      <if test="arrisVers != null">
-        arris_vers,
-      </if>
       <if test="arrisName != null">
         arris_name,
       </if>
-      <if test="arrisDetail != null">
-        arris_detail,
+      <if test="arrisVers != null">
+        arris_vers,
       </if>
       <if test="arrisDesc != null">
         arris_desc,
       </if>
-      <if test="arrisIsCurrV != null">
-        arris_is_curr_v,
+      <if test="arrisState != null">
+        arris_state,
       </if>
       <if test="createId != null">
         create_id,
@@ -85,20 +82,17 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="arrisVers != null">
-        #{arrisVers,jdbcType=VARCHAR},
-      </if>
       <if test="arrisName != null">
         #{arrisName,jdbcType=VARCHAR},
       </if>
-      <if test="arrisDetail != null">
-        #{arrisDetail,jdbcType=VARCHAR},
+      <if test="arrisVers != null">
+        #{arrisVers,jdbcType=INTEGER},
       </if>
       <if test="arrisDesc != null">
         #{arrisDesc,jdbcType=VARCHAR},
       </if>
-      <if test="arrisIsCurrV != null">
-        #{arrisIsCurrV,jdbcType=TINYINT},
+      <if test="arrisState != null">
+        #{arrisState,jdbcType=TINYINT},
       </if>
       <if test="createId != null">
         #{createId,jdbcType=INTEGER},
@@ -121,20 +115,17 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.wenba.common.domain.ArrisInfo">
     update arris_info
     <set>
-      <if test="arrisVers != null">
-        arris_vers = #{arrisVers,jdbcType=VARCHAR},
-      </if>
       <if test="arrisName != null">
         arris_name = #{arrisName,jdbcType=VARCHAR},
       </if>
-      <if test="arrisDetail != null">
-        arris_detail = #{arrisDetail,jdbcType=VARCHAR},
+      <if test="arrisVers != null">
+        arris_vers = #{arrisVers,jdbcType=INTEGER},
       </if>
       <if test="arrisDesc != null">
         arris_desc = #{arrisDesc,jdbcType=VARCHAR},
       </if>
-      <if test="arrisIsCurrV != null">
-        arris_is_curr_v = #{arrisIsCurrV,jdbcType=TINYINT},
+      <if test="arrisState != null">
+        arris_state = #{arrisState,jdbcType=TINYINT},
       </if>
       <if test="createId != null">
         create_id = #{createId,jdbcType=INTEGER},
@@ -157,11 +148,10 @@
 
   <update id="updateByPrimaryKey" parameterType="com.wenba.common.domain.ArrisInfo">
     update arris_info
-    set arris_vers = #{arrisVers,jdbcType=VARCHAR},
-      arris_name = #{arrisName,jdbcType=VARCHAR},
-      arris_detail = #{arrisDetail,jdbcType=VARCHAR},
+    set arris_name = #{arrisName,jdbcType=VARCHAR},
+      arris_vers = #{arrisVers,jdbcType=INTEGER},
       arris_desc = #{arrisDesc,jdbcType=VARCHAR},
-      arris_is_curr_v = #{arrisIsCurrV,jdbcType=TINYINT},
+      arris_state = #{arrisState,jdbcType=TINYINT},
       create_id = #{createId,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_id = #{updateId,jdbcType=INTEGER},
@@ -169,9 +159,6 @@
       ext = #{ext,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
-
-
 
 
   <!-- 获取表达式列表总记录数量 -->
@@ -240,11 +227,11 @@
         </if>
       </if>
     </where>
-      limit #{pageNum},#{pageSize}
+    limit #{pageNumber},#{pageSize}
   </select>
 
 
-  <!-- 查询表达式列表 -->
+  <!-- 检验表达式版本和表达式名称 -->
   <select id="checkArrisVN" parameterType="com.wenba.common.domain.ArrisInfo" resultType="int">
     select count(1) as count
       from arris_info
@@ -257,12 +244,12 @@
   <!-- 新增表达式 -->
   <insert id="insArrisInfoList" parameterType="com.wenba.common.domain.ArrisInfo">
     insert into arris_info
-    (arris_vers, arris_name,
-    arris_detail, arris_desc, arris_is_curr_v,
+    (arris_name, arris_vers,
+    arris_desc, arris_state,
     create_id, ext)
     values
-      (#{arrisVers,jdbcType=VARCHAR}, #{arrisName,jdbcType=VARCHAR},
-      #{arrisDetail,jdbcType=VARCHAR}, #{arrisDesc,jdbcType=VARCHAR}, #{arrisIsCurrV,jdbcType=TINYINT},
+      (#{arrisName,jdbcType=VARCHAR},#{arrisVers,jdbcType=VARCHAR},
+       #{arrisDesc,jdbcType=VARCHAR}, 1,
       #{createId,jdbcType=INTEGER}, #{ext,jdbcType=VARCHAR})
   </insert>
 
@@ -272,20 +259,17 @@
     update arris_info
     <set>
       update_time = now(),
-      <if test="arrisVers != null and arrisVers != ''">
-        arris_vers = #{arrisVers},
-      </if>
       <if test="arrisName != null and arrisName != ''">
         arris_name = #{arrisName},
       </if>
-      <if test="arrisDetail != null and arrisDetail != ''">
-        arris_detail = #{arrisDetail},
+      <if test="arrisVers != null and arrisVers != ''">
+        arris_vers = #{arrisVers},
       </if>
       <if test="arrisDesc != null and arrisDesc != ''">
         arris_desc = #{arrisDesc},
       </if>
-      <if test="arrisIsCurrV != null and arrisIsCurrV != ''">
-        arris_is_curr_v = #{arrisIsCurrV},
+      <if test="arrisState != null and arrisState != ''">
+        arris_state = #{arrisState},
       </if>
       <if test="createId != null and createId != ''">
         create_id = #{createId},
@@ -322,5 +306,23 @@
       </if>
     </where>
   </delete>
+
+
+  <!-- 检验表达式是否存在 -->
+  <select id="checkArrisID" parameterType="int" resultType="int">
+    select count(1) as count
+      from arris_info
+    where
+          id = #{id}
+  </select>
+
+  <!-- 校验表达式是否改变 -->
+  <select id="checkArrisDet" resultType="int">
+    select count(1) as count
+      from arris_info
+    where
+          id = #{id}
+          and arris_detail = #{arrisDetail}
+    </select>
 
 </mapper>

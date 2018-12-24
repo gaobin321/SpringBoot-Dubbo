@@ -172,7 +172,7 @@ public class TokenBuilder {
 	public VariableToken buildVariable() {
 		return new VariableToken(this);
 	}
-	
+
 	public RuntimeValue buildRuntimeValue() {
 		return new RuntimeValue(this);
 	}

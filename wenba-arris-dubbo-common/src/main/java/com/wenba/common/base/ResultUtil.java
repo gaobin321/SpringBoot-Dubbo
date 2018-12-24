@@ -1,9 +1,11 @@
 package com.wenba.common.base;
 
+import java.io.Serializable;
+
 /**
  * Created by imiiot on 2017/6/1.
  */
-public class ResultUtil {
+public class ResultUtil implements Serializable {
     public static Result success() {
         Result result = new Result();
         result.setCode(1);

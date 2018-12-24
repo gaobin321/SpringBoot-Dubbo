@@ -1,9 +1,11 @@
 package com.wenba.common.utils.base;
 
+import java.io.Serializable;
+
 /**
  * 通用返回结构
  */
-public class BaseResult {
+public class BaseResult implements Serializable {
     //请求结果编码
     int code;
 

@@ -1,5 +1,7 @@
 package com.wenba.common.base;
 
+import java.io.Serializable;
+
 /**
  * @ Author
  * @ Date       ：Created in 6:32 PM 2018/10/24
@@ -7,7 +9,7 @@ package com.wenba.common.base;
  * @ Modified By：
  * @ Description：基类工具类
  */
-public class BaseResultUtil {
+public class BaseResultUtil implements Serializable {
     public static final int SUCCESS_CODE = 200;
     public static final String SUCCESS_MSG = "success";
 

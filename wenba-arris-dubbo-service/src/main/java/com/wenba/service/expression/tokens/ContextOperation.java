@@ -6,6 +6,7 @@ package com.wenba.service.expression.tokens;
  *
  */
 public enum ContextOperation {
+
 	/**
 	 * if条件
 	 */
@@ -17,12 +18,12 @@ public enum ContextOperation {
 	 */
 	ELSE_CONDITION,
 	那么_CONDITION,
-	
+
 	/**
 	 * 新建上下文
 	 */
 	NEW_CONTEXT,
-	
+
 	/**
 	 * 上下文结束
 	 */

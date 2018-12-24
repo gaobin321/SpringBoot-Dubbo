@@ -1,5 +1,7 @@
 package com.wenba.common.utils.base;
 
+import java.io.Serializable;
+
 /**
  * 正值 表示成功
  * 负值 表示失败
@@ -7,7 +9,7 @@ package com.wenba.common.utils.base;
  *
  * 拓展，继承此类，不同项目实现自定义
  */
-public class BaseResultUtil {
+public class BaseResultUtil implements Serializable {
     /* 基础 +|- [1,9] */
 
     // 成功

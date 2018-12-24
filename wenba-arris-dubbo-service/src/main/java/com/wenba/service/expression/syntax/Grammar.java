@@ -15,15 +15,24 @@ public class Grammar {
 								new Token[]{sentence});
 		start.addProduction(new TerminalToken[]{ifKey}, 
 								new Token[]{ifStatement});
+		/**
+		 * 	GB
+		 * 	添加[如果-那么]中文关键字
+		 */
 		start.addProduction(new TerminalToken[]{如果Key},
-								new Token[]{ifStatement});
+								new Token[]{如果Statement});
 
 		ifStatement.addProduction(new TerminalToken[]{ifKey},
 								new Token[]{ifKey, leftBracket, bolExpression, ifConditionCo, rightBracket,
-											newContextCo, block, endContextCo, elseSection, endIFCo, endIfKey});
-		ifStatement.addProduction(new TerminalToken[]{如果Key},
-								new Token[]{如果Key, leftBracket, bolExpression, 如果ConditionCo, rightBracket,
-										那么ConditionCo});
+											newContextCo, block, endContextCo,endIFCo, elseSection});
+		/**
+		 * 	GB
+		 * 	添加[如果-那么]中文关键字
+		 */
+		如果Statement.addProduction(new TerminalToken[]{如果Key},
+								new Token[]{如果Key, leftBracket, bolExpression, ifConditionCo, rightBracket,
+											那么Key,newContextCo, block, endContextCo, 否则Section, endIFCo, endIfKey});
+
 
 		block.addProduction(new TerminalToken[]{variableToBeAssigned, variable, constant, minusMark, leftBracket, function, notMark},
 								new Token[]{sentence, block});
@@ -31,12 +40,27 @@ public class Grammar {
 								new Token[]{ifStatement, block});
 		block.addProduction(new TerminalToken[]{elseKey, endIfKey}, 
 								new Token[]{});
-		
-		elseSection.addProduction(new TerminalToken[]{elseKey}, 
+
+		/**
+		 * 	GB
+		 * 	添加[如果-那么]中文关键字
+		 */
+		block.addProduction(new TerminalToken[]{如果Key},
+				new Token[]{如果Statement, block});
+		block.addProduction(new TerminalToken[]{否则Key, endIfKey},
+				new Token[]{});
+
+		否则Section.addProduction(new TerminalToken[]{否则Key},
+				new Token[]{否则Key, elseConditionCo, newContextCo, block, endContextCo});
+		否则Section.addProduction(new TerminalToken[]{endIfKey},
+				new Token[]{});
+
+
+		elseSection.addProduction(new TerminalToken[]{elseKey},
 								new Token[]{elseKey, elseConditionCo, newContextCo, block, endContextCo});
-		elseSection.addProduction(new TerminalToken[]{endIfKey}, 
+		elseSection.addProduction(new TerminalToken[]{endIfKey},
 								new Token[]{});
-		
+
 		sentence.addProduction(new TerminalToken[]{variableToBeAssigned},
 								new Token[]{variableToBeAssigned, assignMark, bolExpression, assignExe, semicolon});
 		sentence.addProduction(new TerminalToken[]{variable, constant, minusMark, leftBracket, function, notMark}, 
@@ -147,13 +171,13 @@ public class Grammar {
 	
 	//变量
 	private VariableToken variable = TokenBuilder.getBuilder().buildVariable();
-	
+
 	//要被赋值的变量
 	private VariableToken variableToBeAssigned = TokenBuilder.getBuilder().toBeAssigned(true).buildVariable();
-	
+
 	//函数
 	private FunctionToken function = TokenBuilder.getBuilder().buildFunction();
-	
+
 	//界符
 	private DelimiterToken addMark =  TokenBuilder.getBuilder().text("+").buildDelimiter();
 	private DelimiterToken minusMark = TokenBuilder.getBuilder().text("-").buildDelimiter();
@@ -180,12 +204,15 @@ public class Grammar {
 	private KeyToken elseKey = TokenBuilder.getBuilder().text("else").buildKey();
 	private KeyToken endIfKey = TokenBuilder.getBuilder().text("endif").buildKey();
 
+
 	/**
 	 * 	GB
-	 * 	添加中文关键字
+	 * 	添加[如果-那么]中文关键字
 	 */
 	private KeyToken 如果Key = TokenBuilder.getBuilder().text("如果").buildKey();
 	private KeyToken 那么Key = TokenBuilder.getBuilder().text("那么").buildKey();
+	private KeyToken 否则Key = TokenBuilder.getBuilder().text("否则").buildKey();
+
 
 
 	//非终结符
@@ -193,6 +220,11 @@ public class Grammar {
 	private NonterminalToken ifStatement = TokenBuilder.getBuilder().buildNT();
 	private NonterminalToken block = TokenBuilder.getBuilder().buildNT();
 	private NonterminalToken elseSection = TokenBuilder.getBuilder().buildNT();
+
+	private NonterminalToken 如果Statement = TokenBuilder.getBuilder().buildNT();
+	private NonterminalToken 否则Section = TokenBuilder.getBuilder().buildNT();
+
+
 	private NonterminalToken sentence = TokenBuilder.getBuilder().buildNT();
 	private NonterminalToken bolExpression = TokenBuilder.getBuilder().buildNT();
 	private NonterminalToken _bolExpression = TokenBuilder.getBuilder().buildNT();
@@ -227,7 +259,7 @@ public class Grammar {
 	private ExecutionToken notEqualExe = TokenBuilder.getBuilder().executable(OperatorFactory.getOperator("NOTEQUAL")).buildExecution();
 	private ExecutionToken assignExe = TokenBuilder.getBuilder().executable(OperatorFactory.getOperator("ASSIGN")).buildExecution();
 	private ExecutionToken functionExe = TokenBuilder.getBuilder().executable(null).buildExecution();//函数执行标志
-	
+
 	//上下文操作符号
 	private ContextOperationToken ifConditionCo = TokenBuilder.getBuilder().contextOperation(ContextOperation.IF_CONDITION).buildContextOperation();
 	private ContextOperationToken elseConditionCo = TokenBuilder.getBuilder().contextOperation(ContextOperation.ELSE_CONDITION).buildContextOperation();
@@ -235,6 +267,5 @@ public class Grammar {
 	private ContextOperationToken endContextCo = TokenBuilder.getBuilder().contextOperation(ContextOperation.END_CONTEXT).buildContextOperation();
 	private ContextOperationToken endIFCo = TokenBuilder.getBuilder().contextOperation(ContextOperation.END_IF).buildContextOperation();
 
-	private ContextOperationToken 如果ConditionCo = TokenBuilder.getBuilder().contextOperation(ContextOperation.如果_CONDITION).buildContextOperation();
-	private ContextOperationToken 那么ConditionCo = TokenBuilder.getBuilder().contextOperation(ContextOperation.那么_CONDITION).buildContextOperation();
+
 }

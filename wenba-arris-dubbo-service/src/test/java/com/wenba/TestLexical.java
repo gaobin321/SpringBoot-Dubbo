@@ -101,6 +101,64 @@ public class TestLexical extends TestCase {
 		System.out.println(value);
 	}
 
+	public void testChinaExp1() {
+		Expression exp = factory.getExpression("如果(2 > 1) 那么 (2); 否则 1; endif");
+		exp.lexicalAnalysis();
+		Valuable result = exp.evaluate();
+		Object value = result.getValue();
+		System.out.println("结果:" + value);
+	}
+
+	public void testChinaExp2() {
+		Expression exp = factory.getExpression("如果(2 > 1) 2; 否则(1); endif");
+		exp.lexicalAnalysis();
+		Valuable result = exp.evaluate();
+		Object value = result.getValue();
+		System.out.println("结果:" + value);
+	}
+
+	public void testFor() {
+		//表达式
+		Expression exp = factory.getExpression("for(3);a=1;a+3;");
+		//参数赋值
+		//exp.initVariable();
+		//词法分析
+		exp.lexicalAnalysis();
+		//执行表达式
+		Valuable result = exp.evaluate();
+		//获取执行表达式结果
+		Object value = result.getValue();
+		System.out.println("结果: " + value.toString());
+	}
+
+	public void testJudge() {
+		//表达式
+		Expression exp = factory.getExpression("judge(2 > 1,2,1)");
+		//参数赋值
+		//exp.initVariable();
+		//词法分析
+		exp.lexicalAnalysis();
+		//执行表达式
+		Valuable result = exp.evaluate();
+		//获取执行表达式结果
+		Object value = result.getValue();
+		System.out.println("结果: " + value.toString());
+	}
+
+	public void testIfthen() {
+		//表达式
+		Expression exp = factory.getExpression("ifthen(2 > 2,2)");
+		//参数赋值
+		//exp.initVariable();
+		//词法分析
+		exp.lexicalAnalysis();
+		//执行表达式
+		Valuable result = exp.evaluate();
+		//获取执行表达式结果
+		Object value = result.getValue();
+		System.out.println("结果: " + value.toString());
+	}
+
 	/**
 	 * 计算额外积分金额 规则如下: 订单原价金额
 	 * 100以下, 不加分
@@ -127,26 +185,28 @@ public class TestLexical extends TestCase {
 		//表达式
 		List<String> expressions = new ArrayList<String>();
 
-		expressions.add("ifthen((pChannel == \"客服\"), \"S+,中\");");
+		/*expressions.add("ifthen((pChannel == \"客服\"), \"S+,中\");");
 		expressions.add("ifthen((pChannel == \"SEM\" && pChannel1 == \"学好网\" && pChannel2 == \"百度\" && pAddress == \"北京\"), \"S+,高\");");
 		expressions.add("ifthen((pChannel == \"SEM\" && pChannel1 == \"学好网\" && pAddress == \"北京\"), \"S+,高\");");
 		expressions.add("ifthen((pChannel == \"DSP\" && pChannel1 == \"朋友圈\" && pChannel2 == \"账号1\" && pAddress == \"上海\"), \"S,中\");");
 		expressions.add("ifthen((pChannel == \"DSP\" && pChannel1 == \"朋友圈\" && pChannel2 == \"账号2\" && pAddress == \"北京\"), \"A+,中\");");
 		expressions.add("ifthen((pChannel == \"NW对外投放\" && pChannel1 == \"公众号\" && pAddress == \"天津\"), \"S,中\");");
-		expressions.add("ifthen((pChannel == \"NW对外投放\" && pChannel1 == \"公众号\"), \"A,中\");");
-		expressions.add("ifthen((pChannel == \"DSP\"), \"S,低\");");
+		expressions.add("ifthen((pChannel == \"NW对外投放\" && pChannel1 == \"公众号\"), \"A,中\");");*/
+		/*expressions.add("ifthen((pChannel == \"DSP\"), \"S,低\");");*/
+		expressions.add("ifthen((\"#渠道\" == \"DSP\"), \"S,低\");");
 
 
 		List<Map<String,Object>> list = new ArrayList<>();
 
 		Map<String,Object> map1 = new HashMap<>();
-		Map<String,Object> map2 = new HashMap<>();
-		Map<String,Object> map3 = new HashMap<>();
+		/*Map<String,Object> map2 = new HashMap<>();
+		Map<String,Object> map3 = new HashMap<>();*/
 
-		map1.put("pChannel","DSP");
+		/*map1.put("pChannel","DSP");*/
+		map1.put("\"#渠道\"","DSP");
 		list.add(map1);
 
-		map2.put("pChannel","NW对外投放");
+		/*map2.put("pChannel","NW对外投放");
 		map2.put("pChannel1","公众号");
 		map2.put("pAddress","天津");
 		list.add(map2);
@@ -154,7 +214,7 @@ public class TestLexical extends TestCase {
 		map3.put("pChannel","SEM");
 		map3.put("pChannel1","学好网");
 		map3.put("pAddress","北京");
-		list.add(map3);
+		list.add(map3);*/
 
 		Expression exp;
 		Valuable result = null;
@@ -207,8 +267,8 @@ public class TestLexical extends TestCase {
 	*/
 	public void testExpression() {
 		//Expression exp = factory.getExpression("if(2 > 1) 2; endif");
-		//Expression exp = factory.getExpression("if(2 > 1) 2; else 1; endif");
-		Expression exp = factory.getExpression("if(2 > 1) 2; else 1;");
+		Expression exp = factory.getExpression("if(2 > 1) 2; else 1; endif");
+		//Expression exp = factory.getExpression("if(2 > 1) 2; else 1;");
 		//Expression exp = factory.getExpression("if(2 > 1) a=abs(-3); if(false) a=a+1; else a=a+2; endif a=a+1; else if(false) a=9; endif endif");
 		/*Expression exp = factory.getExpression("if(2 > 1)" +
 													"a=abs(-3);" +
@@ -236,20 +296,13 @@ public class TestLexical extends TestCase {
 		exp.lexicalAnalysis();
 		Valuable result = exp.evaluate();
 		Object value = result.getValue();
+		System.out.println(value.toString());
 
 		/*Expression exp = factory.getExpression("b+2");
 		exp.lexicalAnalysis();
 		Valuable result = exp.evaluate();
 		Object value = result.getValue();
 		System.out.println("结果:" + value);*/
-	}
-
-	public void testChinaExp() {
-		Expression exp = factory.getExpression("如果(true) 那么 (1 + 2)");
-		exp.lexicalAnalysis();
-		Valuable result = exp.evaluate();
-		Object value = result.getValue();
-		System.out.println("结果:" + value);
 	}
 
 	public void testNumber() {

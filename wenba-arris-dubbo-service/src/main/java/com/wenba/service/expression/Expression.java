@@ -136,7 +136,7 @@ public class Expression {
 				variableNames.add(terminalToken.getText());
 		return variableNames;
 	}
-	
+
 	/**
 	 * 初始化变量
 	 * @param name

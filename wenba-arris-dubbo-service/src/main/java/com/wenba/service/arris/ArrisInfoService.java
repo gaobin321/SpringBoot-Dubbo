@@ -4,7 +4,7 @@ import com.wenba.common.domain.ArrisInfo;
 
 import java.util.List;
 
-public interface ArrisService {
+public interface ArrisInfoService {
 
     //获取表达式列表总记录数量
     int selArrisInfoListNum(ArrisInfo ai);
@@ -23,4 +23,7 @@ public interface ArrisService {
 
     //删除表达式
     int delArrisInfoList(ArrisInfo ai);
+
+    //检验表达式是否存在
+    int checkArrisID(int id);
 }

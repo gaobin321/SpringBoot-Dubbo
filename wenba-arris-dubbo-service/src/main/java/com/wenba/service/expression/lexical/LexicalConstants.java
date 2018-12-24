@@ -173,7 +173,7 @@ public class LexicalConstants {
 		keys.add("endif");
 		keys.add("var");
 		keys.add("while");
-		keys.add("for");
+		//keys.add("for");
 		keys.add("do");
 
 		/**
@@ -182,19 +182,20 @@ public class LexicalConstants {
 		 */
 
 		keys.add("如果");
-		keys.add("假使");
+		/*keys.add("假使");
 		keys.add("假如");
 		keys.add("要是");
-		keys.add("倘若");
+		keys.add("倘若");*/
 
 
-		keys.add("就");
 		keys.add("那么");
+		/*keys.add("就");
 		keys.add("便");
 		keys.add("则");
 		keys.add("那样");
-		keys.add("那麼");
-		keys.add("那么");
+		keys.add("那麼");*/
+
+		keys.add("否则");
 
 		/**
 		 * 关键字

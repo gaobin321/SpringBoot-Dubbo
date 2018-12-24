@@ -1,10 +1,12 @@
 package com.wenba.api;
 
 import com.wenba.common.domain.ArrisInfo;
+import com.wenba.common.utils.base.DataResult;
 
 import java.util.List;
+import java.util.Map;
 
-public interface ArrisServiceFacade {
+public interface ArrisInfoServiceFacade {
 
 
     //获取表达式列表总记录数量
@@ -25,6 +27,6 @@ public interface ArrisServiceFacade {
     //删除表达式
     int delArrisInfoList(ArrisInfo ai);
 
-    //调用表达式
-    int transArrisInfoList(ArrisInfo ai);
+    //检验表达式是否存在
+    int checkArrisID(int id);
 }

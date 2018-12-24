@@ -21,7 +21,7 @@ public class ExpressionFactory {
 	
 	public Expression getExpression(String expression) {
 		if(null != expression && !"".equals(expression) && !expression.endsWith(";")) {
-			if(!expression.contains("if") && !expression.contains("endif")) {
+			if(!expression.contains("if") || !expression.contains("endif")) {
 				expression = expression + ";";
 			}
 		}

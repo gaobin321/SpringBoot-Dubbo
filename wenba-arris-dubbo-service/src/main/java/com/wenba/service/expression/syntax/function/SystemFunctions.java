@@ -52,5 +52,6 @@ public class SystemFunctions {
 		registerFunction(new Abs());
 		registerFunction(new Judge());
 		registerFunction(new Ifthen());
+		registerFunction(new For());
 	}
 }
