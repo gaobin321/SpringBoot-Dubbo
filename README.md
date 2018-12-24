@@ -13,9 +13,12 @@ arris-dubbo-web WEB 服务聚合层，服务消费者，对外提供HTTP接口
 
 arris-dubbo-web 与 arris-dubbo-rpc 两个单独打包部署，不同的Jar包。
 arris-dubbo-web module功能同 wenba-arris-dubbo-web 项目
-https://gitlab-wenba.xueba100.com:2443/wenba-java/wenba-arris-dubbo-web.git
+https://github.com/gaobin321/SpringBoot-Dubbo-Web.git
 
 使用方式
 -----
 
 后期会将框架结构制作成Maven archetype，方便快速自动生成新的迭代项目代码
+
+expression-analyzer 使用文档
+http://www.docin.com/p-1382090644.html
